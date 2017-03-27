@@ -60,6 +60,13 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="#">
+                                            Profile
+                                        </a>
+                                        <a href="#"
+                                           onclick="alert('You are deleting {{ Auth::user()->name }}\nAre you sure?');">
+                                            Delete user
+                                        </a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
