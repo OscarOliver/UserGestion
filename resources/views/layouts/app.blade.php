@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'User Management') }}</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" >
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -60,7 +61,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="#">
+                                        <a href="profile">
                                             Profile
                                         </a>
                                         <a href="#"
