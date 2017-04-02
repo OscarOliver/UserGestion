@@ -5,25 +5,30 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ Auth::user()->name }} {{ Auth::user()->surname }}</div>
+                    <div class="panel-heading">{{ $user->name }} {{ $user->surname }}</div>
 
                     <div class="panel-body">
-                        Email: {{ Auth::user()->email }}
+                        Email: {{ $user->email }}
                     </div>
                     <div class="panel-body">
-                        Phone: {{ Auth::user()->phone }}
+                        Phone: {{ $user->phone }}
                     </div>
                     <div class="panel-body">
-                        DNI: {{ Auth::user()->dni }}
+                        DNI: {{ $user->dni }}
                     </div>
                     <div class="panel-body">
-                        Address: {{ Auth::user()->address }}
+                        Address: {{ $user->address }}
                     </div>
                 </div>
                 <div>
                     <button class="btn btn-primary" onclick="window.location='{{ url('/edit') }}'">
                         Edit
                     </button>
+                </div>
+                <div>
+                    <a href="/users"><button class="btn btn-primary">
+                        Go Back
+                    </button></a>
                 </div>
             </div>
         </div>

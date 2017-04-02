@@ -24,7 +24,7 @@ class ProfileController
 //    }
 
     /**
-     * Show the application dashboard.
+     * Show the user profile.
      *
      * @return \Illuminate\Http\Response
      */
