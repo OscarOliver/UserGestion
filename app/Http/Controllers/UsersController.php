@@ -14,7 +14,7 @@ class UsersController extends Controller
 
     public function index() {
 
-        $users = User::all();
+        $users = User::orderBy('name', 'asc')->get();
 
         return view('users.index', compact('users'));
     }
@@ -22,5 +22,25 @@ class UsersController extends Controller
     public function show(User $user) {
 
         return view('users.show', compact('user'));
+    }
+
+    public function edit(User $user) {
+
+        return view('users.edit', compact('user'));
+    }
+
+    public function update() {
+        $this->validate(request(), [
+            'name' => 'required|min:3|max:255',
+            'surname' => 'max:255',
+            'address' => 'max:255',
+            'phone' => 'max:255',
+            'email' => 'required|email|max:255|unique:users',
+//            'password' => 'required|min:6|confirmed',
+        ]);
+
+        User::updated(request(['name', 'surname', 'address', 'phone', 'email']));
+
+        return redirect('/users');
     }
 }

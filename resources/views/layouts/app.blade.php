@@ -36,7 +36,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/users') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -61,7 +61,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="profile">
+                                        <a href="/users/{{ Auth::user()->id }}">
                                             Profile
                                         </a>
                                         <a href="#"

@@ -10,25 +10,29 @@
                     <div class="panel-body">
                         Email: {{ $user->email }}
                     </div>
-                    <div class="panel-body">
-                        Phone: {{ $user->phone }}
-                    </div>
-                    <div class="panel-body">
-                        DNI: {{ $user->dni }}
-                    </div>
-                    <div class="panel-body">
-                        Address: {{ $user->address }}
-                    </div>
+                    @if(auth()->user()->getAuthIdentifier() == $user->id)
+                        <div class="panel-body">
+                            Phone: {{ $user->phone }}
+                        </div>
+                        <div class="panel-body">
+                            DNI: {{ $user->dni }}
+                        </div>
+                        <div class="panel-body">
+                            Address: {{ $user->address }}
+                        </div>
+                    @endif
                 </div>
+                    <div>
+                        <a href="/users"><button class="btn btn-default">
+                                Go Back
+                        </button></a>
+                        @if(auth()->user()->getAuthIdentifier() == $user->id)
+                        <a href="/users/{{ $user->id }}/edit"><button class="btn btn-primary" onclick="window.location='{{ url('/edit') }}'">
+                            Edit
+                        </button></a>
+                        @endif
+                    </div>
                 <div>
-                    <button class="btn btn-primary" onclick="window.location='{{ url('/edit') }}'">
-                        Edit
-                    </button>
-                </div>
-                <div>
-                    <a href="/users"><button class="btn btn-primary">
-                        Go Back
-                    </button></a>
                 </div>
             </div>
         </div>
