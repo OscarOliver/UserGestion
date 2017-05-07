@@ -8,10 +8,9 @@
                 <div class="list-group">
                     @foreach($users as $user)
                         <a class="list-group-item" href="/users/{{ $user->id }}">
-                        @if(auth()->user()->getAuthIdentifier() == $user->id)
-                            <b>{{ $user->name }} {{ $user->surname }}</b>
-                        @else
                             {{ $user->name }} {{ $user->surname }}
+                        @if(auth()->user()->getAuthIdentifier() == $user->id)
+                            <span class="label label-success">you</span>
                         @endif
                             <span class="pull-right">{{ $user->created_at->toFormattedDateString() }}</span>
                         </a>

@@ -42,7 +42,7 @@
 
                             {{--Dni--}}
                             <div class="form-group">
-                                <label for="dni" class="col-md-4 control-label">DNI *</label>
+                                <label for="dni" class="col-md-4 control-label">DNI</label>
 
                                 <div class="col-md-6">
                                     <input id="dni" type="text" class="form-control" name="dni" value="{{ $user->dni }}" disabled>

@@ -16,9 +16,10 @@ Route::get('/users', 'UsersController@index');
 
 Route::get('/users/{user}', 'UsersController@show');
 
-Route::post('/users/{user}', 'UsersController@show');
+Route::post('/users/{user}', 'UsersController@store');
 
 Route::get('/users/{user}/edit', 'UsersController@edit');
+
 
 Route::get('profile', 'ProfileController')->middleware('auth');
 

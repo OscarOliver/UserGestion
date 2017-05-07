@@ -25,8 +25,10 @@ class UsersController extends Controller
     }
 
     public function edit(User $user) {
-
-        return view('users.edit', compact('user'));
+        if (auth()->user()->getAuthIdentifier() == $user->id)
+            return view('users.edit', compact('user'));
+        else
+            return view('accessDenied');
     }
 
     public function update() {
