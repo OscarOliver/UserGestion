@@ -16,7 +16,7 @@ Route::get('/users', 'UsersController@index');
 
 Route::get('/users/{user}', 'UsersController@show');
 
-Route::post('/users/{user}', 'UsersController@store');
+Route::put('/users/{user}', 'UsersController@update');
 
 Route::get('/users/{user}/edit', 'UsersController@edit');
 

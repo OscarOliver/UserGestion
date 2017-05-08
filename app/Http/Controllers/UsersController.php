@@ -31,18 +31,35 @@ class UsersController extends Controller
             return view('accessDenied');
     }
 
-    public function update() {
+    public function update(Request $request) {
+
+        if (auth()->user()->getAuthIdentifier() != $request->user_id)
+            return view('accessDenied');
+
         $this->validate(request(), [
             'name' => 'required|min:3|max:255',
             'surname' => 'max:255',
             'address' => 'max:255',
             'phone' => 'max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255',
 //            'password' => 'required|min:6|confirmed',
         ]);
 
-        User::updated(request(['name', 'surname', 'address', 'phone', 'email']));
+        $user = User::findOrFail($request->user_id);
 
-        return redirect('/users');
+        if ($request->input('name'))
+            $user->name = $request->name;
+        if ($request->input('surname'))
+            $user->surname = $request->surname;
+        if ($request->input('address'))
+            $user->address = $request->address;
+        if ($request->input('phone'))
+            $user->phone = $request->phone;
+        if ($request->input('email'))
+            $user->email = $request->email;
+
+        $user->save();
+
+        return redirect('/users/' . $user->id);
     }
 }
