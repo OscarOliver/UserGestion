@@ -128,14 +128,23 @@
                                     <button type="submit" class="btn btn-success">
                                         Save
                                     </button>
-                                    <a href="/users"><button class="btn btn-danger pull-right">
-                                    Cancel
-                                    </button></a>
+                                    <a href="/users">
+                                        <button class="btn btn-danger pull-right">
+                                            Cancel
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <a href="/users/{{ $user->id }}/change_password">
+                    Change password
+                </a>
             </div>
         </div>
     </div>

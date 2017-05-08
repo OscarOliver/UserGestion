@@ -36,16 +36,26 @@ class UsersController extends Controller
         if (auth()->user()->getAuthIdentifier() != $request->user_id)
             return view('accessDenied');
 
+
+        $user = User::findOrFail($request->user_id);
+
         $this->validate(request(), [
             'name' => 'required|min:3|max:255',
             'surname' => 'max:255',
             'address' => 'max:255',
             'phone' => 'max:255',
-            'email' => 'required|email|max:255',
+//            'email' => 'required|email|max:255',
 //            'password' => 'required|min:6|confirmed',
         ]);
 
-        $user = User::findOrFail($request->user_id);
+        $email = $request->input('email');
+        if ($email && ($email !== $user->email))
+        {
+            $this->validate(request(), [
+                'email' => 'email|max:255|unique:users',
+            ]);
+            $user->email = $email;
+        }
 
         if ($request->input('name'))
             $user->name = $request->name;
@@ -55,8 +65,40 @@ class UsersController extends Controller
             $user->address = $request->address;
         if ($request->input('phone'))
             $user->phone = $request->phone;
-        if ($request->input('email'))
-            $user->email = $request->email;
+
+        $user->save();
+
+        return redirect('/users/' . $user->id);
+    }
+
+
+    public function changePassword(User $user) {
+        if (auth()->user()->getAuthIdentifier() == $user->id)
+            return view('users.changePW', compact('user'));
+        else
+            return view('accessDenied');
+    }
+
+
+    public function updatePassword(Request $request) {
+
+        if (auth()->user()->getAuthIdentifier() != $request->user_id)
+            return view('accessDenied');
+
+        $user = auth()->user();
+
+        $pw = bcrypt($request->input('old-password'));
+        if ($user->password != $pw)
+            return response('Error with actual password', 500);
+//            return view('accessDenied');
+
+
+        $this->validate(request(), [
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $newPW = bcrypt($request->input('password'));
+        $user->password = $newPW;
 
         $user->save();
 

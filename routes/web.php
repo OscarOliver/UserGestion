@@ -20,6 +20,11 @@ Route::put('/users/{user}', 'UsersController@update');
 
 Route::get('/users/{user}/edit', 'UsersController@edit');
 
+Route::get('/users/{user}/change_password', 'UsersController@changePassword');
+
+Route::put('/users/{user}/change_password', 'UsersController@updatePassword');
+
+
 
 Route::get('profile', 'ProfileController')->middleware('auth');
 
