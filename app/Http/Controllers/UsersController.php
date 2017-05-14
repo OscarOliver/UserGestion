@@ -89,7 +89,11 @@ class UsersController extends Controller
 
         $pw = bcrypt($request->input('old-password'));
         if ($user->password != $pw)
-            return response('Error with actual password', 500);
+        {
+            $errors['old-password'] = 'Error with actual password';
+            return back(500, $errors);
+        }
+            response('Error with actual password', 500);
 //            return view('accessDenied');
 
 
