@@ -22,6 +22,30 @@
     </script>
 </head>
 <body>
+    <!-- Delete user Modal -->
+    @if (!Auth::guest())
+    <div id="deleteUserModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Deleting {{ Auth::user()->name }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This action will delete your account<br>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-danger" href="/users/{{ Auth::user()->id }}/delete">Delete</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @endif
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -64,20 +88,20 @@
                                         <a href="/users/{{ Auth::user()->id }}">
                                             Profile
                                         </a>
-                                        <a href="#"
-                                           onclick="alert('You are deleting {{ Auth::user()->name }}\nAre you sure?');">
-                                            Delete user
-                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
                                     </li>
+                                    <li>
+                                        <a href="#" data-toggle="modal" data-target="#deleteUserModal">Delete user</a>
+                                    </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
                                 </ul>
                             </li>
                         @endif

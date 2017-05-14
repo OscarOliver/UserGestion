@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UsersController extends Controller
@@ -86,22 +87,32 @@ class UsersController extends Controller
             return view('accessDenied');
 
         $user = auth()->user();
+        $u = User::findOrFail($user->getAuthIdentifier());
 
-        $pw = bcrypt($request->input('old-password'));
-        if ($user->password != $pw)
-            return response('Error with actual password', 500);
-//            return view('accessDenied');
+        if (!Hash::check($request->input('old-password'), $user->getAuthPassword()))
+        {
+            return redirect('users/'.$user->getAuthIdentifier().'/change_password')->withErrors('Incorrect password', 'old-password');
+        }
 
 
         $this->validate(request(), [
             'password' => 'required|min:6|confirmed',
         ]);
-
         $newPW = bcrypt($request->input('password'));
         $user->password = $newPW;
 
         $user->save();
 
         return redirect('/users/' . $user->id);
+    }
+
+    public function destroy(User $user) {
+
+        if (auth()->user()->getAuthIdentifier() != $user->id)
+            return view('accessDenied');
+
+        $user->delete();
+
+        return redirect('home');
     }
 }

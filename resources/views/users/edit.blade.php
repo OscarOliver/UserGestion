@@ -96,27 +96,9 @@
                                 </div>
                             </div>
 
-                            {{--Password--}}
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" placeholder="Enter new password to change it">
-
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            {{--Confirm password--}}
                             <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Changing password? Confirm it please">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <a href="/users/{{ $user->id }}/change_password">Change password</a>
                                 </div>
                             </div>
 
@@ -138,13 +120,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <a href="/users/{{ $user->id }}/change_password">
-                    Change password
-                </a>
             </div>
         </div>
     </div>

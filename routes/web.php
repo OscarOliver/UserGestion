@@ -12,23 +12,29 @@ Route::get('/home', 'HomeController@index');
 //    return view('profile');
 //})->middleware('auth');
 
-Route::get('/users', 'UsersController@index');
+Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/users/{user}', 'UsersController@show');
+    Route::get('/users', 'UsersController@index');
 
-Route::put('/users/{user}', 'UsersController@update');
+    Route::get('/users/{user}', 'UsersController@show');
 
-Route::get('/users/{user}/edit', 'UsersController@edit');
+    Route::put('/users/{user}', 'UsersController@update');
 
-Route::get('/users/{user}/change_password', 'UsersController@changePassword');
+    Route::get('/users/{user}/edit', 'UsersController@edit');
 
-Route::put('/users/{user}/change_password', 'UsersController@updatePassword');
+    Route::get('/users/{user}/change_password', 'UsersController@changePassword');
 
+    Route::put('/users/{user}/change_password', 'UsersController@updatePassword');
 
+    Route::get('/users/{user}/delete', 'UsersController@destroy');
+});
 
-Route::get('profile', 'ProfileController')->middleware('auth');
-
-Route::get('profile/edit', 'EditProfileController')->middleware('auth');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+//Route::get('profile', 'ProfileController')->middleware('auth');
+//
+//Route::get('profile/edit', 'EditProfileController')->middleware('auth');
+//
+//Route::get('/home', 'HomeController@index')->name('home');
