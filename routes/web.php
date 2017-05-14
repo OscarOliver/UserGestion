@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/users/{user}/change_password', 'UsersController@changePassword');
 
     Route::put('/users/{user}/change_password', 'UsersController@updatePassword');
+
+    Route::get('/users/{user}/delete', 'UsersController@destroy');
 });
 
 Auth::routes();

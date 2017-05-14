@@ -105,4 +105,14 @@ class UsersController extends Controller
 
         return redirect('/users/' . $user->id);
     }
+
+    public function destroy(User $user) {
+
+        if (auth()->user()->getAuthIdentifier() != $user->id)
+            return view('accessDenied');
+
+        $user->delete();
+
+        return redirect('home');
+    }
 }
