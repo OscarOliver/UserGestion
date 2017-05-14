@@ -29,3 +29,6 @@ Route::put('/users/{user}/change_password', 'UsersController@updatePassword');
 Route::get('profile', 'ProfileController')->middleware('auth');
 
 Route::get('profile/edit', 'EditProfileController')->middleware('auth');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
