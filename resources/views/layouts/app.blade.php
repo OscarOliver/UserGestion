@@ -9,15 +9,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'User Management') }}</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" >
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
+        {{--window.Laravel = {{ json_encode([--}}
+            {{--'csrfToken' => csrf_token(),--}}
+        {{--]) }};--}}
     </script>
 </head>
 <body>
@@ -35,7 +36,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/users') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -60,6 +61,13 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="/users/{{ Auth::user()->id }}">
+                                            Profile
+                                        </a>
+                                        <a href="#"
+                                           onclick="alert('You are deleting {{ Auth::user()->name }}\nAre you sure?');">
+                                            Delete user
+                                        </a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
