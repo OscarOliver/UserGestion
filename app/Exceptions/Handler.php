@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
             {
                 // not found
                 case 404:
-                    return redirect('404');
+                    return redirect('/page_not_found');
                     break;
 
                 // internal error

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\View;
 
 class ReportsController extends Controller
 {
@@ -22,29 +23,37 @@ class ReportsController extends Controller
     {
         $users = User::orderBy('name', 'asc')->get();
 
-        return view('reports.byName', compact($users));
+        $view = view('reports.byName')->with('users', $users);
+        $html = $view->render();
+
+        $this->toPDF($html, "users by name");
     }
 
     public function byDni()
     {
         $users = User::orderBy('dni', 'asc')->get();
 
-        return view('reports.byDni', compact($users));
+        $view = view('reports.byDni')->with('users', $users);
+        $html = $view->render();
+
+        $this->toPDF($html, "users by DNI");
     }
 
     public function byCity()
     {
         $users = User::orderBy('address', 'asc')->get();
 
-        return view('reports.byCity', compact($users));
+        $view = view('reports.byCity')->with('users', $users);
+        $html = $view->render();
+
+        $this->toPDF($html, "users by city");
     }
 
-    public function toPDF($html)
+    private function toPDF($html, $filename = "report")
     {
-        $html = "<html><body><h1>Oscar</h1><p>Descripció d'oscar</p></body></html>";
         $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
         $dompdf->loadHtml($html);
         $dompdf->render();
-        $dompdf->stream("sample.pdf", array("Attachment"=>0));
+        $dompdf->stream($filename.".pdf", array("Attachment"=>0));
     }
 }

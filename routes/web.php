@@ -39,15 +39,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/reports/users_by_city', 'ReportsController@byCity');
 
-    Route::get('/reports/topdf', 'ReportsController@toPDF');
+    Route::get('/reports/to_pdf', 'ReportsController@toPDF');
 });
 
-Auth::routes();
 
-
-Route::get('.*', function () {
+Route::get('/page_not_found', function () {
     return view('404');
 });
+
+//Route::any('*', function () {
+//    return view('404');
+//});
 
 
 //Route::get('profile', 'ProfileController')->middleware('auth');
