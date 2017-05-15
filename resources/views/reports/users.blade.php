@@ -21,7 +21,8 @@
 </head>
 <body>
 <div>
-    <h1>Users by {{ $title }}</h1>
+    <h1>User Management</h1>
+    <h3>Users by {{ $title }}</h3>
     @php
         $date = date("d/M/Y");
         $time = date("H:i");

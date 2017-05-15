@@ -5,6 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                <h1>Users</h1>
                 <div class="list-group">
                     @foreach($users as $user)
                         <a class="list-group-item" href="/users/{{ $user->id }}">

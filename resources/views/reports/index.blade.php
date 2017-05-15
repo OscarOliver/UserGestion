@@ -5,7 +5,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <a class="btn btn-info" href="/reports/users_by_name">User name</a>
+                <h1>Reports about users</h1>
+                <a class="btn btn-info" href="/reports/users_by_name">Name</a>
                 <a class="btn btn-info" href="/reports/users_by_dni">DNI</a>
                 <a class="btn btn-info" href="/reports/users_by_city">City</a>
             </div>
