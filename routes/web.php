@@ -33,15 +33,21 @@ Route::group(['middleware' => 'auth'], function () {
     // -- Reports --
     Route::get('/reports', 'ReportsController@index');
 
-    Route::get('/reports', 'ReportsController@byName');
+    Route::get('/reports/users_by_name', 'ReportsController@byName');
 
-    Route::get('/reports', 'ReportsController@byDni');
+    Route::get('/reports/users_by_dni', 'ReportsController@byDni');
 
-    Route::get('/reports', 'ReportsController@byCity');
+    Route::get('/reports/users_by_city', 'ReportsController@byCity');
+
+    Route::get('/reports/topdf', 'ReportsController@toPDF');
 });
 
 Auth::routes();
 
+
+Route::get('.*', function () {
+    return view('404');
+});
 
 
 //Route::get('profile', 'ProfileController')->middleware('auth');

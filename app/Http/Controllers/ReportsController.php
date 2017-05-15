@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-//require_once '../../../vendor/autoload.php';
-
 use Illuminate\Http\Request;
 use App\User;
 use Dompdf\Dompdf;
@@ -43,6 +41,10 @@ class ReportsController extends Controller
 
     public function toPDF($html)
     {
-
+        $html = "<html><body><h1>Oscar</h1><p>Descripció d'oscar</p></body></html>";
+        $dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        $dompdf->stream("sample.pdf", array("Attachment"=>0));
     }
 }
