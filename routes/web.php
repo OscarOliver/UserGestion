@@ -14,6 +14,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function () {
 
+    // -- Users --
     Route::get('/users', 'UsersController@index');
 
     Route::get('/users/{user}', 'UsersController@show');
@@ -27,6 +28,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/users/{user}/change_password', 'UsersController@updatePassword');
 
     Route::get('/users/{user}/delete', 'UsersController@destroy');
+
+
+    // -- Reports --
+    Route::get('/reports', 'ReportsController@index');
+
+    Route::get('/reports', 'ReportsController@byName');
+
+    Route::get('/reports', 'ReportsController@byDni');
+
+    Route::get('/reports', 'ReportsController@byCity');
 });
 
 Auth::routes();
