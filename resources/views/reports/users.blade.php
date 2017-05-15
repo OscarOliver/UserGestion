@@ -21,7 +21,7 @@
 </head>
 <body>
 <div>
-    <h1>Users by name</h1>
+    <h1>Users by {{ $title }}</h1>
     @php
         $date = date("d/M/Y");
         $time = date("H:i");
@@ -32,10 +32,10 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>DNI</th>
+            <th>Name</th>
             <th>Email</th>
+            <th>Address</th>
             <th>Created at</th>
             <th></th>
         </tr>
@@ -43,10 +43,10 @@
         <tbody>
         @foreach($users as $user)
             <tr>
-                <th scope="row">{{ $user->id }}</th>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->surname }}</td>
+                <th scope="row">{{ $user->dni }}</th>
+                <td>{{ $user->name }} {{ $user->surname }}</td>
                 <td>{{ $user->email }}</td>
+                <td>{{ $user->address }}</td>
                 <td>{{ $user->created_at->toFormattedDateString() }}</td>
                 <td>
                     <a class="btn btn-info" href="http://usermanagement.com/users/{{ $user->id }}">
