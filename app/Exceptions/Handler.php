@@ -40,11 +40,33 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        if($this->isHttpException($exception))
+        {
+            switch ($exception->getStatusCode())
+            {
+                // not found
+                case 404:
+                    return redirect('/page_not_found');
+                    break;
+
+                // internal error
+                case '500':
+                    return redirect()->guest('home');
+                    break;
+
+                default:
+                    return parent::render($request, $exception);
+                    break;
+            }
+        }
+        else
+        {
+            return parent::render($request, $exception);
+        }
     }
 
     /**
